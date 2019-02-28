@@ -11,21 +11,32 @@ import numpy as np
 hashes,imgs = filereader("../testcases/a_example.txt")
 Vs = imgs['V']
 Hs = imgs['H']
+ids = []
+
+def toNs(A):
+    Ns = [0 for j in range(len(A))]
+    for i in range(len(A)):
+        Ns[0] = [len(A[i][:-1])] + [A[i][-1]]
+    return Ns
+    
 
 def combine_Vs(v1,v2):
-    w = list(set(v1 + v2))
+    w = list(set(v1[:-1] + v2[:-1]))
     return w
     
-
-def generate_Ws(Vs):
-    Ws = []
-    
+def generate_Ws(Vs):    
     if len(Vs) % 2 == 1:
-        del Vs[-1]
+        del Vs[0]
         
-    for i in range(len(Vs)//2):
-        Ws.append(combine_Vs(Vs[i],Vs[-(i+1)]))
+    N = len(Vs)//2
+                
+    Ws = [0 for i in range(N)]
+    ids = np.zeros(N)
+        
+    for i in range(N):
+        Ws[i] = combine_Vs(Vs[i],Vs[-(i+1)]) + [[(Vs[i][-1],Vs[-(i+1)][-1])]]
     
     return Ws
 
-#Ws = generate_Ws(Vs)
+#while len(Hs) != 1 or len(Ws) != 1:
+#    pass
