@@ -15,7 +15,7 @@ while len(imgs) > 0:
     print(n)
     best = 0
     bd = 0
-    for i in range(min(10000,len(imgs))):
+    for i in range(len(imgs)):
         d = dist(slideshow[n-1][:-1], imgs[i][:-1])
         if d >= bd:
             best = i
