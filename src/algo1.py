@@ -16,7 +16,7 @@ ids = []
 def toNs(A):
     Ns = [0 for j in range(len(A))]
     for i in range(len(A)):
-        Ns[0] = [len(A[i][:-1])] + [A[i][-1]]
+        Ns[i] = [len(A[i][:-1])] + [A[i][-1]]
     return Ns
     
 
@@ -37,6 +37,3 @@ def generate_Ws(Vs):
         Ws[i] = combine_Vs(Vs[i],Vs[-(i+1)]) + [[(Vs[i][-1],Vs[-(i+1)][-1])]]
     
     return Ws
-
-#while len(Hs) != 1 or len(Ws) != 1:
-#    pass
