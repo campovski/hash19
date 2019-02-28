@@ -35,4 +35,4 @@ def generate_Ws(Vs):
     for i in range(N):
         Ws[i] = combine_Vs(Vs[i],Vs[-(i+1)]) + [str(Vs[i][-1]) + " " + str(Vs[-(i+1)][-1])]
     
-    return Ws.sort(key=len)
+    return sorted(Ws,key=len)
