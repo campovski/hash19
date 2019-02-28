@@ -21,7 +21,7 @@ def filereader(filename):
                 hashes[line[j+2].strip()] = M
                 imgs[line[0]][-1][j] = M
                 M += 1
-        imgs[line[0]][-1][:-2] = sorted(imgs[line[0]][-1][:-2])
+        imgs[line[0]][-1][:-1] = sorted(imgs[line[0]][-1][:-1])
         imgs[line[0]][-1][-1] = i
 
     imgs['H'].sort(key=len)
