@@ -13,7 +13,6 @@ def filereader(filename):
         line = f.readline().split(" ")
         n = int(line[1])
         imgs[line[0]].append([None for _ in range(n+1)])
-        print(imgs)
         for j in range(n):
             try:
                 imgs[line[0]][-1][j] = hashes[line[j+2].strip()]
