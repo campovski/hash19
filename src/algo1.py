@@ -10,7 +10,7 @@ import numpy as np
 from scipy.optimize import linear_sum_assignment
 
 if __name__ == "__main__":
-    hashes,imgs = filereader("../testcases/c_memorable_moments.txt")
+    hashes,imgs = filereader("../testcases/b_lovely_landscapes.txt")
     Vs = imgs['V']
     Hs = imgs['H']
 
@@ -69,24 +69,49 @@ def dist2(a, b):
 def correct_hs(Hs):
     for i in range(len(Hs)):
         Hs[i][-1] = str(Hs[i][-1])
+    return Hs
     
-if 0:
-    N_opt = 10
+if 1:
+    N_opt = 100
     
     Ws = generate_Ws(Vs)
+    Hs = correct_hs(Hs)
     imgs = Ws + Hs
     
+    comb_str = []
         
     for ind in range(0,len(imgs),N_opt):
         vals = [[0 for i in range(N_opt)] for j in range(N_opt)]
+        done = []
         for i in range(N_opt):
             for j in range(N_opt):
                 if i == j:
-                    vals[i][j] = 0
-                d = dist(imgs[ind+i],imgs[ind+j])
-                vals[i][j] = d
+                    vals[i][j] = -999
+                else:
+                    d = dist(imgs[ind+i],imgs[ind+j])
+                    vals[i][j] = d
                 
-        row_ind, col_ind = linear_sum_assignment(np.array(vals))
+        row_ind, col_ind = linear_sum_assignment(-np.array(vals))
+        
+        for k in range(N_opt):
+            if k in done or col_ind[k] in done:
+                continue
+#            print(row_ind[k],col_ind[k])
+            comb_str.append(imgs[ind+row_ind[k]][-1])
+            comb_str.append(imgs[ind+col_ind[k]][-1])
+            done.append(k)
+            done.append(col_ind[k])
+            
+    with open("../out/c_testJJ.txt", 'w') as f:
+        f.write("{}\n".format(len(comb_str)))
+        for i in range(len(comb_str)):
+            f.write("{}\n".format(comb_str[i]))
+        
+        
+                
+        
+        
+        
         
         
                 
